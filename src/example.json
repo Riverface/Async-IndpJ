@@ -1,0 +1,345 @@
+{
+    "meta": {
+        "data_type": "array",
+        "item_type": "Doctor",
+        "total": 3,
+        "count": 1,
+        "skip": 2,
+        "limit": 10
+    },
+    "data": [
+        {
+            "practices": [
+                {
+                    "location_slug": "or-portland",
+                    "within_search_area": true,
+                    "distance": 8.13763108816125,
+                    "lat": 45.52435,
+                    "lon": -122.55894,
+                    "uid": "5b38d60db3653e4296dd47d73f166e84",
+                    "name": "Joseph Haberman, MD",
+                    "accepts_new_patients": true,
+                    "insurance_uids": [
+                        "firstchoice-firstchoice",
+                        "bcbsbluecard-bcbsbluecardppo",
+                        "odshealthplan-odsnetwork",
+                        "premerabluecross-premeraheritageheritageplus1",
+                        "premerabluecross-premeraheritagesignature"
+                    ],
+                    "visit_address": {
+                        "city": "Portland",
+                        "lat": 45.52435,
+                        "lon": -122.55894,
+                        "state": "OR",
+                        "state_long": "Oregon",
+                        "street": "233 NE 102nd Ave",
+                        "zip": "97220"
+                    },
+                    "office_hours": [],
+                    "phones": [
+                        {
+                            "number": "5032531105",
+                            "type": "landline"
+                        }
+                    ],
+                    "languages": [
+                        {
+                            "name": "English",
+                            "code": "en"
+                        }
+                    ]
+                },
+                {
+                    "location_slug": "or-lincoln-city",
+                    "within_search_area": true,
+                    "distance": 98.19879224939474,
+                    "lat": 44.985271,
+                    "lon": -123.996063,
+                    "uid": "bfa1dbc377aabf626d15d29eee1d8f5d",
+                    "name": "Joseph Haberman, MD",
+                    "accepts_new_patients": true,
+                    "insurance_uids": [
+                        "firstchoice-firstchoice",
+                        "providencehealthsystem-providencepreferredppo",
+                        "aetna-aetnachoiceposii",
+                        "aetna-aetnasignatureadministratorsppo",
+                        "aetna-aetnamanagedchoiceposopenaccess"
+                    ],
+                    "visit_address": {
+                        "city": "Lincoln City",
+                        "lat": 44.985271,
+                        "lon": -123.996063,
+                        "state": "OR",
+                        "state_long": "Oregon",
+                        "street": "3043 NE 28th St",
+                        "zip": "97367"
+                    },
+                    "office_hours": [],
+                    "phones": [
+                        {
+                            "number": "5419967118",
+                            "type": "landline"
+                        }
+                    ],
+                    "languages": [
+                        {
+                            "name": "English",
+                            "code": "en"
+                        }
+                    ]
+                }
+            ],
+            "educations": [],
+            "profile": {
+                "first_name": "Joseph",
+                "middle_name": "Jeffrey",
+                "last_name": "Haberman",
+                "slug": "joseph-haberman",
+                "title": "MD",
+                "image_url": "https://asset1.betterdoctor.com/assets/general_doctor_male.png",
+                "gender": "male",
+                "languages": [
+                    {
+                        "name": "English",
+                        "code": "en"
+                    }
+                ],
+                "bio": "Dr. Joseph Haberman, MD--specialist in diagnostic radiology--currently practices medicine at Portland, Oregon, Beaverton, Oregon, Lake oswego, Oregon, and Silverton, Oregon.\n\nDr. Haberman is licensed to see patients in Oregon.\n\nIn addition to having active medical licenses, Dr. Haberman has been found to hold one or more active medical licenses, and successfully passed a malpractice history screening."
+            },
+            "ratings": [],
+            "insurances": [
+                {
+                    "insurance_plan": {
+                        "uid": "firstchoice-firstchoice",
+                        "name": "First Choice",
+                        "category": [
+                            "medical"
+                        ]
+                    },
+                    "insurance_provider": {
+                        "uid": "firstchoicehealth",
+                        "name": "First Choice Health"
+                    }
+                },
+                {
+                    "insurance_plan": {
+                        "uid": "bcbsbluecard-bcbsbluecardppo",
+                        "name": "BCBS Blue Card PPO",
+                        "category": [
+                            "medical"
+                        ]
+                    },
+                    "insurance_provider": {
+                        "uid": "bcbs",
+                        "name": "BCBS"
+                    }
+                },
+                {
+                    "insurance_plan": {
+                        "uid": "odshealthplan-odsnetwork",
+                        "name": "ODS Network",
+                        "category": [
+                            "medical"
+                        ]
+                    },
+                    "insurance_provider": {
+                        "uid": "odshealthplan",
+                        "name": "ODS Health Plan"
+                    }
+                },
+                {
+                    "insurance_plan": {
+                        "uid": "premerabluecross-premeraheritageheritageplus1",
+                        "name": "Premera Heritage  Heritage Plus 1",
+                        "category": [
+                            "medical"
+                        ]
+                    },
+                    "insurance_provider": {
+                        "uid": "bcbs",
+                        "name": "BCBS"
+                    }
+                },
+                {
+                    "insurance_plan": {
+                        "uid": "premerabluecross-premeraheritagesignature",
+                        "name": "Premera Heritage Signature",
+                        "category": [
+                            "medical"
+                        ]
+                    },
+                    "insurance_provider": {
+                        "uid": "bcbs",
+                        "name": "BCBS"
+                    }
+                },
+                {
+                    "insurance_plan": {
+                        "uid": "firstchoice-firstchoice",
+                        "name": "First Choice",
+                        "category": [
+                            "medical"
+                        ]
+                    },
+                    "insurance_provider": {
+                        "uid": "firstchoicehealth",
+                        "name": "First Choice Health"
+                    }
+                },
+                {
+                    "insurance_plan": {
+                        "uid": "providencehealthsystem-providencepreferredppo",
+                        "name": "Providence Preferred PPO",
+                        "category": [
+                            "medical"
+                        ]
+                    },
+                    "insurance_provider": {
+                        "uid": "providencehealthservices",
+                        "name": "Providence Health  Services"
+                    }
+                },
+                {
+                    "insurance_plan": {
+                        "uid": "aetna-aetnachoiceposii",
+                        "name": "Aetna Choice POS II",
+                        "category": [
+                            "medical"
+                        ]
+                    },
+                    "insurance_provider": {
+                        "uid": "aetna",
+                        "name": "Aetna"
+                    }
+                },
+                {
+                    "insurance_plan": {
+                        "uid": "aetna-aetnasignatureadministratorsppo",
+                        "name": "Aetna Signature Administrators PPO",
+                        "category": [
+                            "medical"
+                        ]
+                    },
+                    "insurance_provider": {
+                        "uid": "aetna",
+                        "name": "Aetna"
+                    }
+                },
+                {
+                    "insurance_plan": {
+                        "uid": "aetna-aetnamanagedchoiceposopenaccess",
+                        "name": "Aetna Managed Choice POS Open Access",
+                        "category": [
+                            "medical"
+                        ]
+                    },
+                    "insurance_provider": {
+                        "uid": "aetna",
+                        "name": "Aetna"
+                    }
+                }
+            ],
+            "specialties": [
+                {
+                    "uid": "diagnostic-radiologist",
+                    "name": "Diagnostic Radiology",
+                    "description": "Specializes in imaging via X-rays and ultrasound.",
+                    "category": "medical",
+                    "actor": "Diagnostic Radiologist",
+                    "actors": "Diagnostic Radiologists"
+                }
+            ],
+            "claims": [
+                {
+                    "hcpcs": "Q9967",
+                    "hcpcs_description": "Low osmolar contrast material, 300-399 mg/ml iodine concentration, per ml",
+                    "service_cnt": 2925,
+                    "bene_uniq_cnt": 29,
+                    "avg_allowed_amt": 0.1400273504,
+                    "avg_charge_amt": 1.0365470085,
+                    "avg_payment_amt": 0.099165812
+                },
+                {
+                    "hcpcs": "A9579",
+                    "hcpcs_description": "Injection, gadolinium-based magnetic resonance contrast agent, not otherwise specified (nos), per ml",
+                    "service_cnt": 572,
+                    "bene_uniq_cnt": 36,
+                    "avg_allowed_amt": 1.9091258741,
+                    "avg_charge_amt": 11.958041958,
+                    "avg_payment_amt": 1.4495979021
+                },
+                {
+                    "hcpcs": "70486",
+                    "hcpcs_description": "CT scan maxillofacial without contrast material",
+                    "service_cnt": 71,
+                    "bene_uniq_cnt": 64,
+                    "avg_allowed_amt": 137.50211268,
+                    "avg_charge_amt": 375.69014085,
+                    "avg_payment_amt": 105.08619718
+                },
+                {
+                    "hcpcs": "70553",
+                    "hcpcs_description": "Magnetic image, brain (MRI)",
+                    "service_cnt": 53,
+                    "bene_uniq_cnt": 53,
+                    "avg_allowed_amt": 493.59811321,
+                    "avg_charge_amt": 1421.2830189,
+                    "avg_payment_amt": 380.42056604
+                },
+                {
+                    "hcpcs": "71010",
+                    "hcpcs_description": "Chest x-ray",
+                    "service_cnt": 24,
+                    "bene_uniq_cnt": 20,
+                    "avg_allowed_amt": 8.63,
+                    "avg_charge_amt": 30,
+                    "avg_payment_amt": 6.9
+                },
+                {
+                    "hcpcs": "70491",
+                    "hcpcs_description": "CT scan soft tissue neck with contrast material",
+                    "service_cnt": 23,
+                    "bene_uniq_cnt": 22,
+                    "avg_allowed_amt": 206.41347826,
+                    "avg_charge_amt": 629.60869565,
+                    "avg_payment_amt": 146.37478261
+                },
+                {
+                    "hcpcs": "70480",
+                    "hcpcs_description": "CT scan orbit / fossa / ear without contrast material",
+                    "service_cnt": 20,
+                    "bene_uniq_cnt": 20,
+                    "avg_allowed_amt": 176.756,
+                    "avg_charge_amt": 573.8,
+                    "avg_payment_amt": 120.258
+                },
+                {
+                    "hcpcs": "71020",
+                    "hcpcs_description": "Chest x-ray",
+                    "service_cnt": 13,
+                    "bene_uniq_cnt": 13,
+                    "avg_allowed_amt": 10.32,
+                    "avg_charge_amt": 36,
+                    "avg_payment_amt": 8.26
+                },
+                {
+                    "hcpcs": "78815",
+                    "hcpcs_description": "Positron Emission Tomography (PET) with CT; skull base to mid-thigh",
+                    "service_cnt": 12,
+                    "bene_uniq_cnt": 12,
+                    "avg_allowed_amt": 840.56666667,
+                    "avg_charge_amt": 2969.6666667,
+                    "avg_payment_amt": 672.45666667
+                }
+            ],
+            "licenses": [
+                {
+                    "number": "MD16023",
+                    "state": "OR"
+                }
+            ],
+            "uid": "2857143a05252983da498dc69b3e218c",
+            "npi": "1740368695"
+        }
+    ]
+}
