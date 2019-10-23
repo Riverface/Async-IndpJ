@@ -1,18 +1,40 @@
 export class DocList {
 
     constructor(location, firstname, lastname, query) {
-        this.location = location != "" ? `location=${location}` : "";
+
+        this.location = location;
         
         this.name = (firstname != "") ? `&first_name=${firstname}` : "";
 
         this.name += (lastname != "") ? `&last_name=${lastname}` : "";
 
-        this.query = (query != undefined) ? ("&query=" + query.split(' ').join('%20')) : "";
-        this.url = `https://api.betterdoctor.com/2016-03-01/doctors?${this.location}&skip=2&limit=10${this.query}${this.name}&user_key=` + process.env.API_KEY;
+        this.query = (query != "") ? ("&query= " + query.split(' ').join('%20')) : " ";
+
+        this.geoURL = `https://api.geocod.io/v1.4/geocode?q=${this.location}&limit=1&api_key=`+ process.env.GEO_KEY;
+       
         this.responsetext = [];
         this.entries = [];
+        this.georesponsetext = [];
+
+    }
+    CallGeo(){
+        let theobj = this;
+        let georequest = new XMLHttpRequest();
+        georequest.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                theobj.georesponsetext = JSON.parse(this.response);
+                console.log(theobj.georesponsetext);
+                theobj.location = theobj.georesponsetext.results[0].location.lat + "," + theobj.georesponsetext.results[0].location.lng + ",100";
+                theobj.Call();
+            }
+        }
+        georequest.open("GET", theobj.geoURL, true);
+        georequest.send();
+
+    
     }
     Call() {
+        this.url = `https://api.betterdoctor.com/2016-03-01/doctors?location=${this.location}&skip=2&limit=5${this.query}${this.name}&user_key=` + process.env.API_KEY;
         let theobj = this;
         let request = new XMLHttpRequest();
         request.onreadystatechange = function () {
@@ -20,6 +42,7 @@ export class DocList {
                 theobj.responsetext = JSON.parse(this.responseText);
                 theobj.Parse();
             }
+            
         }
         request.open("GET", this.url, true);
         request.send();
@@ -34,21 +57,29 @@ export class DocList {
             console.log(thisone.profile.slug.split('-').join(" "));
             console.log(thisone.profile.first_name);
             console.log(thisone.profile.last_name);
-            var newdoc = `<blockquote> <div class='container'>`;
+            var newdoc = `<div class='maindoc container'> ${thisone.profile.first_name} ${thisone.profile.last_name} <br>`;
+            newdoc+= `<img src='${thisone.profile.image_url}'></img><br> Specialties:`;
+            thisone.specialties.forEach(function(special){
+                newdoc+=`<div class='container'>${special.name}<br></div>`;
+
+            });
             console.log(thisone.specialties);
+
             thisone.practices.forEach(function (prctce) {
 
-                newdoc += `City: ${prctce.visit_address.city}<br> Latitude: ${prctce.visit_address.lat} <br> Longitude: ${prctce.visit_address.lon} <br> State:${prctce.visit_address.state} (${prctce.visit_address.state_long})<br> Street:${prctce.visit_address.street}<br> ZIP: ${prctce.visit_address.zip}`;
-                newdoc += "<br> <div> Languages";
+                newdoc += `<div class='bordered container'> Practice: ${prctce.name} <br>  City: ${prctce.visit_address.city}<br> Latitude: ${prctce.visit_address.lat} <br> Longitude: ${prctce.visit_address.lon} <br> State:${prctce.visit_address.state} (${prctce.visit_address.state_long})<br> Street:${prctce.visit_address.street}<br> ZIP: ${prctce.visit_address.zip}`;
+                newdoc += "<br>  Languages: <br>";
                 prctce.languages.forEach(function (lang) {
                     newdoc += `${lang.name} (${lang.code})`;
                 });
-                newdoc+= "<br>Phone number:<br>"
+
+                newdoc+= "<div class='phonedoc'><br>"
                 prctce.phones.forEach(function(phone){
-                    newdoc += `${phone.number}`;
+                    newdoc += `${phone.type}: ${phone.number}`;
                     
-                })
-                newdoc += `</div> </blockquote>`;
+                });
+                newdoc+="</div>";
+                newdoc += `</div> `;
                 console.log(prctce.phones);
                 
             });

@@ -1,0 +1,23 @@
+.maindoc{
+border:solid 1px black;
+border-style: double;
+border-radius: 20px;
+width: 500px;
+background-color: lightgreen;
+}
+.phonedoc{
+width: 100px;
+}
+.langdoc{
+width: 100px;
+}
+.bordered{
+    margin: 10px;
+    border:solid 1px black;
+border-style: double;
+border-radius: 20px;
+background-color: lightblue;
+}
+.bordered:nth-of-type(2n){
+background-color: lightpink;
+}
