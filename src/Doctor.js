@@ -4,15 +4,25 @@ export class DocList {
         this.location = location;
         this.name = (firstname != "") ? `&first_name=${firstname}` : "";
         this.name += (lastname != "") ? `&last_name=${lastname}` : "";
-        this.query = (query != "") || typeof query != String ? ("&query= " + query.split(' ').join('%20')) : " ";
+        this.query = (query != "") || typeof query == String ? ("&query= " + query.split(' ').join('%20')) : " ";
         this.geoURL = `https://api.geocod.io/v1.4/geocode?q=${this.location}&limit=1&api_key=` + process.env.GEO_KEY;
-        this.distance = distance;
+        this.distance = distance != "" || typeof distance == Number ? ","+ distance : ', 100';
         this.responsetext = [];
         this.entries = [];
         this.georesponsetext = [];
-
+        if(location.length == 0 ){
+            console.log(this.location)
+            this.url = `https://api.betterdoctor.com/2016-03-01/doctors?skip=2&limit=5${this.query}${this.name}&user_key=` + process.env.API_KEY;
+            this.Call();
+        }
+        else{
+            
+         
+            this.CallGeo();
+        }
     }
     CallGeo() {
+    
         let theobj = this;
         let georequest = new XMLHttpRequest();
         georequest.onreadystatechange = function () {
@@ -36,11 +46,11 @@ export class DocList {
         }
         georequest.open("GET", theobj.geoURL, true);
         georequest.send();
-
+        this.url = `https://api.betterdoctor.com/2016-03-01/doctors?location=${this.location}${this.distance}&skip=2&limit=5${this.query}${this.name}&user_key=` + process.env.API_KEY;
 
     }
     Call() {
-        this.url = `https://api.betterdoctor.com/2016-03-01/doctors?location=${this.location},${this.distance}&skip=2&limit=5${this.query}${this.name}&user_key=` + process.env.API_KEY;
+        
         let theobj = this;
         let request = new XMLHttpRequest();
         request.onreadystatechange = function () {
