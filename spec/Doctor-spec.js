@@ -9,27 +9,33 @@ jasmine.clock().uninstall();
 });
 describe("User can", function () {
     //location,firstname,lastname,query
-    let mainDoc = new DocList("45.5051, -122.6750,100", "Joseph", undefined, undefined);
-    
-    mainDoc.Call();
-    
-    
-   
-    
+    let mainDoc = new DocList("45.5051, -122.6750,100", "Joseph", undefined, "nose",'100');
+    mainDoc.CallGeo();
     it("Create object properly", function () {
         expect(mainDoc).toBeDefined();
         
     });
     it("Receive API input", function(){
-        jasmine.clock().tick(600);
-        expect(mainDoc.responsetext).toBeDefined();
+        
+        setTimeout(() => {
+            expect(mainDoc.responsetext).toBeDefined();
+            
+        }, 600);
     });
     it("parse data into entries array", function () {
-        jasmine.clock().tick(600);
-        expect(mainDoc.entries).toBeDefined();
+
+        setTimeout(() => {
+            expect(mainDoc.entries).toBeDefined();
+            
+        }, 600);
+
     });
     it("catches errors", function(){
-        let faildoc = new DocList("zhdhsdflahsfklhksdgf", "Joseph", undefined, undefined);
+        let faildoc = new DocList("zhdhsdflahsfklhksdgf", "Joseph", undefined, "nose ",'100');
+        faildoc.CallGeo();
+        setTimeout(() => {
     expect(faildoc.responsetext.meta.http_status_code).toBe(401); 
+    
+        }, 600);
     });
 });
