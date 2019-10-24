@@ -1,63 +1,54 @@
 export class DocList {
 
-    constructor(location, firstname, lastname, query) {
-
+    constructor(location, firstname, lastname, query, distance) {
         this.location = location;
-        
         this.name = (firstname != "") ? `&first_name=${firstname}` : "";
-
         this.name += (lastname != "") ? `&last_name=${lastname}` : "";
-
-        this.query = (query != "") ? ("&query= " + query.split(' ').join('%20')) : " ";
-
-        this.geoURL = `https://api.geocod.io/v1.4/geocode?q=${this.location}&limit=1&api_key=`+ process.env.GEO_KEY;
-       
+        this.query = (query != "") || typeof query != String ? ("&query= " + query.split(' ').join('%20')) : " ";
+        this.geoURL = `https://api.geocod.io/v1.4/geocode?q=${this.location}&limit=1&api_key=` + process.env.GEO_KEY;
+        this.distance = distance;
         this.responsetext = [];
         this.entries = [];
         this.georesponsetext = [];
 
     }
-    CallGeo(){
+    CallGeo() {
         let theobj = this;
         let georequest = new XMLHttpRequest();
         georequest.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 theobj.georesponsetext = JSON.parse(this.response);
                 console.log(theobj.georesponsetext);
-                try{
-                    theobj.location = theobj.georesponsetext.results[0].location.lat + "," + theobj.georesponsetext.results[0].location.lng + ",100";
+                try {
+                    theobj.location = theobj.georesponsetext.results[0].location.lat + "," + theobj.georesponsetext.results[0].location.lng;
 
-                }
-                catch(error){
-                console.log("This location isn't formatted properly!");
+                } catch (error) {
+                    console.log("This location isn't formatted properly!");
                 }
                 theobj.Call();
-            }
-            else if (this.readyState === 4 && this.status === 400) {
+            } else if (this.readyState === 4 && this.status === 400) {
                 console.log("Invalid query.");
             } else if (this.readyState === 4 && this.status === 401) {
                 console.log("UNAUTHORIZED ERROR, BEEP BOOP");
-            }
-            else if (this.readyState === 4 && this.status === 422) {
+            } else if (this.readyState === 4 && this.status === 422) {
                 console.log("Can't process!");
             }
         }
         georequest.open("GET", theobj.geoURL, true);
         georequest.send();
 
-    
+
     }
     Call() {
-        this.url = `https://api.betterdoctor.com/2016-03-01/doctors?location=${this.location}&skip=2&limit=5${this.query}${this.name}&user_key=` + process.env.API_KEY;
+        this.url = `https://api.betterdoctor.com/2016-03-01/doctors?location=${this.location},${this.distance}&skip=2&limit=5${this.query}${this.name}&user_key=` + process.env.API_KEY;
         let theobj = this;
         let request = new XMLHttpRequest();
         request.onreadystatechange = function () {
-            
+
             if (this.readyState === 4 && this.status === 200) {
                 theobj.responsetext = JSON.parse(this.responseText);
                 theobj.Parse();
-            }
-            else if (this.readyState === 4 && this.status === 400) {
+            } else if (this.readyState === 4 && this.status === 400) {
                 console.log("Invalid query.");
             } else if (this.readyState === 4 && this.status === 401) {
                 console.log("UNAUTHORIZED ERROR, BEEP BOOP");
@@ -77,9 +68,9 @@ export class DocList {
             console.log(thisone.profile.first_name);
             console.log(thisone.profile.last_name);
             var newdoc = `<div class='maindoc container'> ${thisone.profile.first_name} ${thisone.profile.last_name} <br>`;
-            newdoc+= `<img src='${thisone.profile.image_url}'></img><br> Specialties:`;
-            thisone.specialties.forEach(function(special){
-                newdoc+=`<div class='container'>${special.name}<br></div>`;
+            newdoc += `<img src='${thisone.profile.image_url}'></img><br> Specialties:`;
+            thisone.specialties.forEach(function (special) {
+                newdoc += `<div class='container'>${special.name}<br></div>`;
 
             });
             console.log(thisone.specialties);
@@ -92,15 +83,15 @@ export class DocList {
                     newdoc += `${lang.name} (${lang.code})`;
                 });
 
-                newdoc+= "<div class='phonedoc'><br>"
-                prctce.phones.forEach(function(phone){
+                newdoc += "<div class='phonedoc'><br>"
+                prctce.phones.forEach(function (phone) {
                     newdoc += `${phone.type}: ${phone.number}`;
-                    
+
                 });
-                newdoc+="</div>";
+                newdoc += "</div>";
                 newdoc += `</div> `;
                 console.log(prctce.phones);
-                
+
             });
             theobj.entries.push(newdoc);
             console.log(theobj.entries);
