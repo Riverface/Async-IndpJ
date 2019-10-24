@@ -15,7 +15,7 @@ $(document).ready(function () {
         let mainDoc = new DocList(loc, firstname, lastname, query, distance);
         console.log(mainDoc);
 
-        mainDoc.CallGeo();
+
 
         setTimeout(() => {
             mainDoc.entries.forEach(entry => {

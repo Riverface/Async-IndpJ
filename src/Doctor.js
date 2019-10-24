@@ -5,13 +5,14 @@ export class DocList {
         this.name = (firstname != "") ? `&first_name=${firstname}` : "";
         this.name += (lastname != "") ? `&last_name=${lastname}` : "";
         this.query = (query != "") || typeof query == String ? ("&query= " + query.split(' ').join('%20')) : " ";
-        this.geoURL = `https://api.geocod.io/v1.4/geocode?q=${this.location}&limit=1&api_key=` + process.env.GEO_KEY;
+        this.geoURL = `https://api.geocod.io/v1.4/geocode?q=${location}&limit=1&api_key=` + process.env.GEO_KEY;
         this.distance = distance != "" || typeof distance == Number ? ","+ distance : ', 100';
         this.responsetext = [];
         this.entries = [];
         this.georesponsetext = [];
-        if(location.length == 0 ){
-            console.log(this.location)
+        this.url;
+        if(location.length == 0 || location == '' || location == null || location == undefined){
+            console.log("Hello")
             this.url = `https://api.betterdoctor.com/2016-03-01/doctors?skip=2&limit=5${this.query}${this.name}&user_key=` + process.env.API_KEY;
             this.Call();
         }
@@ -28,14 +29,19 @@ export class DocList {
         georequest.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 theobj.georesponsetext = JSON.parse(this.response);
-                console.log(theobj.georesponsetext);
+                console.log("Good")
+                setTimeout(() => {
+                    
+
                 try {
                     theobj.location = theobj.georesponsetext.results[0].location.lat + "," + theobj.georesponsetext.results[0].location.lng;
-
+                    theobj.url = `https://api.betterdoctor.com/2016-03-01/doctors?location=${theobj.location}${theobj.distance}&skip=2&limit=5${theobj.query}${theobj.name}&user_key=` + process.env.API_KEY;
+                                theobj.Call();
                 } catch (error) {
                     console.log("This location isn't formatted properly!");
                 }
-                theobj.Call();
+            }, 1000);
+
             } else if (this.readyState === 4 && this.status === 400) {
                 console.log("Invalid query.");
             } else if (this.readyState === 4 && this.status === 401) {
@@ -43,10 +49,11 @@ export class DocList {
             } else if (this.readyState === 4 && this.status === 422) {
                 console.log("Can't process!");
             }
+            
         }
         georequest.open("GET", theobj.geoURL, true);
         georequest.send();
-        this.url = `https://api.betterdoctor.com/2016-03-01/doctors?location=${this.location}${this.distance}&skip=2&limit=5${this.query}${this.name}&user_key=` + process.env.API_KEY;
+       
 
     }
     Call() {

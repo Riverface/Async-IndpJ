@@ -15,29 +15,34 @@
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="display-3">Doctor Search</h1>
-            <p class="lead"></p>
+            <p class="lead">Specify a Location, Search Term, or Name (First and/or Last) and click "Search." Location is geocoded via Geocod.io. </p>
             <hr class="my-2">
             <p class="lead">
                 <form id='docform' action="">
                     <div id='' class="form-group">
-                        <small id="helpId" class="form-text text-muted"></small>
-                    </div>
 
-                    First Name: <input id='firstname' type="text"></input> 
-                    Last Name: <input type="text" id='lastname'></input><br>
-                    Location: <input id='location' type="text"></input> Distance: <input type="number" id='distance'></input><br> Search Term: <input type="text" id='query'></input><br>
+                        <small id="helpId" class="form-text text-muted"></small>
+                        <label for=""> First Name: </label> </label> <input id='firstname' type="text"></input>
+                        <label for="">Last Name: </label> <input type="text" id='lastname'></input>
+                            <label for="">Location: </label> <input id='location' type="text"></input>  
+                                Distance (Default: 100 miles):  <input type="number" id='distance'></input> 
+                                    <label for="">Search Term:</label> <input type="text" id='query'></input><br><br>
                     <button class="btn btn-primary btn-lg" type="submit">Search</button>
-            
+                    <br><br>
+                </div>
             </form>
 
     </div>
 
     <blockquote class="blockquote">
-        <p class="mb-0">We have the best doctors.</p>
-        <footer class="blockquote-footer"> <cite title="Source Title">Dr. Tod PhilPod</cite></footer>
+
+
     </blockquote>
-    <div id='doc'></div>
+
 </div>
+<div id='doc'></div>
+<p class="mb-0">We have the best doctors. The absolute best. You won't find doctors better than the ones we got. Trust me.</p>
+<footer class="blockquote-footer"> <cite title="Source Title">Dr. Tod PhilPod</cite></footer>   
 </body>
 
 </html>
