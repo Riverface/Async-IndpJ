@@ -24,8 +24,22 @@ export class DocList {
             if (this.readyState === 4 && this.status === 200) {
                 theobj.georesponsetext = JSON.parse(this.response);
                 console.log(theobj.georesponsetext);
-                theobj.location = theobj.georesponsetext.results[0].location.lat + "," + theobj.georesponsetext.results[0].location.lng + ",100";
+                try{
+                    theobj.location = theobj.georesponsetext.results[0].location.lat + "," + theobj.georesponsetext.results[0].location.lng + ",100";
+
+                }
+                catch(error){
+                console.log("This location isn't formatted properly!");
+                }
                 theobj.Call();
+            }
+            else if (this.readyState === 4 && this.status === 400) {
+                console.log("Invalid query.");
+            } else if (this.readyState === 4 && this.status === 401) {
+                console.log("UNAUTHORIZED ERROR, BEEP BOOP");
+            }
+            else if (this.readyState === 4 && this.status === 422) {
+                console.log("Can't process!");
             }
         }
         georequest.open("GET", theobj.geoURL, true);
@@ -38,11 +52,16 @@ export class DocList {
         let theobj = this;
         let request = new XMLHttpRequest();
         request.onreadystatechange = function () {
+            
             if (this.readyState === 4 && this.status === 200) {
                 theobj.responsetext = JSON.parse(this.responseText);
                 theobj.Parse();
             }
-            
+            else if (this.readyState === 4 && this.status === 400) {
+                console.log("Invalid query.");
+            } else if (this.readyState === 4 && this.status === 401) {
+                console.log("UNAUTHORIZED ERROR, BEEP BOOP");
+            }
         }
         request.open("GET", this.url, true);
         request.send();
