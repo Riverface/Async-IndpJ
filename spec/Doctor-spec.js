@@ -34,7 +34,7 @@ describe("User can", function () {
         let faildoc = new DocList("zhdhsdflahsfklhksdgf", "Joseph", undefined, "nose ",'100');
         faildoc.CallGeo();
         setTimeout(() => {
-    expect(faildoc.responsetext.meta.http_status_code).toBe(401); 
+     expect(faildoc.responsetext.meta.http_status_code).toBe(401); 
     
         }, 600);
     });
