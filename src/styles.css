@@ -11,6 +11,7 @@ width: 500px;
 background-color: lightgreen;
 overflow-y: scroll;
 height: 500px;
+float: left;
 }
 .phonedoc{
 width: 100px;
@@ -41,3 +42,9 @@ width: 1000px;
     clear: both;
 }
 
+#doc{
+width: 100%;
+float: none;
+display: flex;
+
+}

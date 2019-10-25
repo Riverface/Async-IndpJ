@@ -13,16 +13,22 @@ $(document).ready(function () {
         var query = $("#query").val();
         var distance = $("#distance").val();
         let mainDoc = new DocList(loc, firstname, lastname, query, distance);
-        console.log(mainDoc);
-
-
+        $("#loading").show();
 
         setTimeout(() => {
-            mainDoc.entries.forEach(entry => {
-                $("#doc").append(entry);
-                console.log(entry);
-            });
-        }, 5000);
+            $("#loading").hide();
+            if (mainDoc.entries.length != 0){
+                mainDoc.entries.forEach( function(entry) {
+                    $("#doc").append(entry);
+
+                });
+
+            }
+            else{
+                $("#doc").html(mainDoc.statusread);
+                $("#doc").append("No entries to display, try again.");
+            }
+        }, 2500);
 
     });
 

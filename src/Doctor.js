@@ -11,6 +11,7 @@ export class DocList {
         this.entries = [];
         this.georesponsetext = [];
         this.url;
+        this.statusread = "";
         if(location.length == 0 || location == '' || location == null || location == undefined){
             console.log("Hello")
             this.url = `https://api.betterdoctor.com/2016-03-01/doctors?skip=2&limit=5${this.query}${this.name}&user_key=` + process.env.API_KEY;
@@ -29,7 +30,7 @@ export class DocList {
         georequest.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 theobj.georesponsetext = JSON.parse(this.response);
-                console.log("Good")
+
                 setTimeout(() => {
                     
 
@@ -38,16 +39,20 @@ export class DocList {
                     theobj.url = `https://api.betterdoctor.com/2016-03-01/doctors?location=${theobj.location}${theobj.distance}&skip=2&limit=5${theobj.query}${theobj.name}&user_key=` + process.env.API_KEY;
                                 theobj.Call();
                 } catch (error) {
-                    console.log("This location isn't formatted properly!");
+                    theobj.statusread = "The Geocoding API says this is not formatted properly.<br>";
+
                 }
             }, 1000);
 
             } else if (this.readyState === 4 && this.status === 400) {
-                console.log("Invalid query.");
+                theobj.statusread = "Geocoding API:Invalid query.";
+                
             } else if (this.readyState === 4 && this.status === 401) {
-                console.log("UNAUTHORIZED ERROR, BEEP BOOP");
+                theobj.statusread = "Geocoding API:Unauthorized error!";
+                
             } else if (this.readyState === 4 && this.status === 422) {
-                console.log("Can't process!");
+                theobj.statusread = "Geocoding API:Can't process!" 
+                
             }
             
         }
@@ -66,9 +71,14 @@ export class DocList {
                 theobj.responsetext = JSON.parse(this.responseText);
                 theobj.Parse();
             } else if (this.readyState === 4 && this.status === 400) {
-                console.log("Invalid query.");
+                theobj.statusread += "<br>Doctor API: Invalid query.";
+                
             } else if (this.readyState === 4 && this.status === 401) {
-                console.log("UNAUTHORIZED ERROR, BEEP BOOP");
+                theobj.statusread += "<br>Doctor API:Unauthorized error!";
+                
+            } else if (this.readyState === 4 && this.status === 422) {
+                theobj.statusread = "<br>Doctor API:Can't process!" 
+                
             }
         }
         request.open("GET", this.url, true);
@@ -81,16 +91,14 @@ export class DocList {
         // we're using practices data, specifically accepts_new_patients, distance, office_hours, phones, and visit_address
 
         this.responsetext.data.forEach(function (thisone) {
-            console.log(thisone.profile.slug.split('-').join(" "));
-            console.log(thisone.profile.first_name);
-            console.log(thisone.profile.last_name);
+
             var newdoc = `<div class='maindoc container'> ${thisone.profile.first_name} ${thisone.profile.last_name} <br>`;
             newdoc += `<img src='${thisone.profile.image_url}'></img><br> Specialties:`;
             thisone.specialties.forEach(function (special) {
                 newdoc += `<div class='container'>${special.name}<br></div>`;
 
             });
-            console.log(thisone.specialties);
+
 
             thisone.practices.forEach(function (prctce) {
 
@@ -107,11 +115,11 @@ export class DocList {
                 });
                 newdoc += "</div>";
                 newdoc += `</div> `;
-                console.log(prctce.phones);
+
 
             });
             theobj.entries.push(newdoc);
-            console.log(theobj.entries);
+
         });
     }
 }
